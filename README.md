@@ -1,6 +1,9 @@
 # Netflix-gpt
 - Create react app with vite build tool
 - Configured tailwind in the project
+- Header
+- Login form
+- Sign up form
 
 # Features
 - Login/sign up page
