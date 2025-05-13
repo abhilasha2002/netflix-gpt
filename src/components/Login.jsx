@@ -1,25 +1,60 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
 import "../App.css";
-import bgImage from "../assets/netflix-login-image.png";
 import isValid from "../utils/validate";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const [errMessage,setErrorMessage]=useState(null);
-  const emailRef=useRef(null);
-  const passwordRef=useRef(null);
-  const nameRef=useRef(null);
+  const [errMessage, setErrorMessage] = useState(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
 
   const toggleSignIn = () => {
     setIsSignIn((prev) => !prev);
   };
-  const handleButtonClick=()=>{
+  const handleButtonClick = () => {
     //Validate form data
-    const message=isValid(emailRef.current.value,passwordRef.current.value);
+    const message = isValid(emailRef.current.value, passwordRef.current.value);
     setErrorMessage(message);
 
     //Sign in/sign up
-  }
+    if (!isSignIn) {
+      //sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("user", user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errMessage);
+        });
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log('user loged in',user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errMessage);
+        });
+    }
+  };
 
   return (
     <div>
@@ -55,13 +90,13 @@ const Login = () => {
           type="password"
         />
         <p className="mb-2 pb-2 text-red-700 ">{errMessage}</p>
-        <button className="p-2 my-2 bg-[rgb(229,9,20)] text-white font-bold w-full rounded"
-        onClick={(e)=>{
-          e.preventDefault();
-        handleButtonClick()
-      }}
-
-          >
+        <button
+          className="p-2 my-2 bg-[rgb(229,9,20)] text-white font-bold w-full rounded"
+          onClick={(e) => {
+            e.preventDefault();
+            handleButtonClick();
+          }}
+        >
           {isSignIn ? "Sign in" : "Sign up"}
         </button>
         {isSignIn && (
