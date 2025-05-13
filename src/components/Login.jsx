@@ -35,7 +35,7 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errMessage);
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
     } else {
       //sign in logic
@@ -51,7 +51,7 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errMessage);
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
     }
   };
