@@ -4,6 +4,8 @@ import "../App.css";
 import isValid from "../utils/validate";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,10 +13,12 @@ const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
-
+const dispatch=useDispatch();
   const toggleSignIn = () => {
     setIsSignIn((prev) => !prev);
   };
+   const users=useSelector((store)=>store.user);
+   console.log('users',users);
   const handleButtonClick = () => {
     //Validate form data
     const message = isValid(emailRef.current.value, passwordRef.current.value);
@@ -30,7 +34,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("user", user);
+          dispatch(addUser(user));
         })
         .catch((error) => {
           const errorCode = error.code;
