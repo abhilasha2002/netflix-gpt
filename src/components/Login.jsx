@@ -2,23 +2,29 @@ import React, { useState, useRef } from "react";
 import Header from "./Header";
 import "../App.css";
 import isValid from "../utils/validate";
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errMessage, setErrorMessage] = useState(null);
+  
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
-const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const toggleSignIn = () => {
     setIsSignIn((prev) => !prev);
   };
-   const users=useSelector((store)=>store.user);
-   console.log('users',users);
   const handleButtonClick = () => {
     //Validate form data
     const message = isValid(emailRef.current.value, passwordRef.current.value);
@@ -34,7 +40,21 @@ const dispatch=useDispatch();
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          dispatch(addUser(user));
+          updateProfile(user, {
+            displayName: nameRef.current.value,
+            photoURL: "https://media.licdn.com/dms/image/v2/D5635AQGB7dLQjaPrEg/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1736707338883?e=1748750400&v=beta&t=x5DIK_eRtRg3_daU7njWWS_ovom0szqPWO0YEhufGsA",
+          })
+            .then(() => {
+              // Profile updated!
+              const {uid,displayName,email,photoURL}=auth.currentUser;
+              dispatch(addUser({uid,displayName,email,photoURL}));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+          
+          
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -49,8 +69,7 @@ const dispatch=useDispatch();
         passwordRef.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log('user loged in',user);
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -61,9 +80,9 @@ const dispatch=useDispatch();
   };
 
   return (
-    <div>
+    <div className="bg-black">
       <Header />
-      <div className="absolute">
+      <div className="absolute h-screen w-screen">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/cb17c41d-6a67-4472-8b91-cca977e65276/web/IN-en-20250505-TRIFECTA-perspective_03ae1a85-5dcf-4d20-a8a6-1e61f7ef73cb_large.jpg"
           alt="netflix-login-image"

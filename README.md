@@ -12,6 +12,8 @@
 - Implement sign in user api
 - Authentication
 - Add Redux Store with userSlice
+- Implemented Sign Out
+- Update user profile api
 
 # Features
 - Login/sign up page
