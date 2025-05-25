@@ -11,6 +11,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { DEFAULT_USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -42,7 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: nameRef.current.value,
-            photoURL: "https://media.licdn.com/dms/image/v2/D5635AQGB7dLQjaPrEg/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1736707338883?e=1748750400&v=beta&t=x5DIK_eRtRg3_daU7njWWS_ovom0szqPWO0YEhufGsA",
+            photoURL: DEFAULT_USER_AVATAR
           })
             .then(() => {
               // Profile updated!
