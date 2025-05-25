@@ -21,6 +21,12 @@
 - Register app and create TMDB account and get api key
 - Get data(movies) from TMDB now playing list
 - Create moviesSlice in redux store and add nowPlaying movies data into redux store
+- Abstract logic for fetching movies and updating store in custom hook
+- Planning for main Container and secondary container
+- Fetch data for trailer video
+- Update store data with trailer data and abstract the logic in a custom hook
+- Embed the youtube video and make to autoplay
+- Style MainContainer to look awesome
 
 # Features
 - Login/sign up page

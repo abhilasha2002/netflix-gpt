@@ -4,11 +4,10 @@ import useMovieTrailer from "../hooks/useMovieTrailer";
 const VideoBackground = ({ movieId }) => {
  const trailerKey=useMovieTrailer(movieId);
   return (
-    <div className="w-screen">
+    <div className="w-screen ">
       <iframe
-        width="100%"
-        height="315"
-        src={"https://www.youtube.com/embed/" + trailerKey}
+      className="w-screen aspect-video"
+        src={"https://www.youtube.com/embed/" + trailerKey+"?autoplay=1"}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"

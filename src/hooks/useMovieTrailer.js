@@ -8,7 +8,7 @@ const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
   const movieTrailer = useSelector((store) => store.movies?.trailerVideo);
   const trailerKey = movieTrailer?.key;
-  console.log("trailer key", trailerKey);
+
   const getMovieVideos = async () => {
     const clips = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/videos`,
@@ -19,7 +19,6 @@ const useMovieTrailer = (movieId) => {
     const filterData = data.results.filter((clip) => clip.type === "Trailer");
     const trailer = filterData.length ? filterData[0] : data.results[0];
     dispatch(addTrailerVideo(trailer));
-    console.log("clips", typeof yt_key, trailer);
   };
   useEffect(() => {
     getMovieVideos();
