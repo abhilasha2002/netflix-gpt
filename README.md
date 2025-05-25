@@ -18,6 +18,9 @@
 - Bug fix: fix if user is not signed in redirect /browse to login page and vice-versa
 - Unsubscribe to onAuthStateChanged callback
 - move hardcoded values to constants file
+- Register app and create TMDB account and get api key
+- Get data(movies) from TMDB now playing list
+- Create moviesSlice in redux store and add nowPlaying movies data into redux store
 
 # Features
 - Login/sign up page

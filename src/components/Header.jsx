@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
+import { NETFLIX_LOGO } from "../utils/constants";
 
 
 const Header = () => {
