@@ -81,7 +81,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-black">
+    <div className="bg-black/50">
       <Header />
       <div className="absolute h-screen w-screen">
         <img
