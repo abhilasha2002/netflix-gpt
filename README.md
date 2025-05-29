@@ -1,5 +1,6 @@
 # NetflixGPT
-    A full-featured Netflix UI clone built with **React** and **Tailwind CSS**, powered by dynamic data from the **TMDB API**. Includes **user authentication via Firebase**, **global state management with Redux**, route protection, and form validation.
+
+A full-featured Netflix UI clone built with **React** and **Tailwind CSS**, powered by dynamic data from the **TMDB API**. Includes **user authentication via Firebase**, **global state management with Redux**, route protection, and form validation.
 
 ## 🔗 Live Demo
 
@@ -7,7 +8,10 @@
 
 ## 📸 Screenshots
 
+### 🔐 Login Page
 ![SignIn/SignOut Screenshot](./src/assets/sign-in.png)
+
+### 🏠 Home Page
 ![Home Page](./src/assets/browse-page.png)
 ![Movies List](./src/assets/browse-movie-lists.png) 
 
